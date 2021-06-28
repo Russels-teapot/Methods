@@ -44,7 +44,6 @@ test('level-up of dead', () => {
 });
 
 
-
 test('damage', () => {
   const swordsman = new Swordsman('asd', 'Swordsman');
   swordsman.damage(10);
