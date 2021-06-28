@@ -94,5 +94,5 @@ class Daemon extends Character {
 }
 
 export {
-  types, Undead, Daemon, Magician, Zombie, Swordsman, Bowman, Character,
+  Undead, Daemon, Magician, Zombie, Swordsman, Bowman, Character, types,
 };

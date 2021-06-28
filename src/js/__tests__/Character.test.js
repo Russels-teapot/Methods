@@ -1,26 +1,26 @@
 import {
-  Undead, Bowman, Magician, Zombie, Daemon, Swordsman, types,
+  Undead, Bowman, Magician, Zombie, Daemon, Swordsman, Character,
 } from '../Character';
 
 test('short name', () => {
-  expect(new Zombie('as', 'Zombie')).toThrow('Длина имени должна быть от 2 до 10 символов');
+  expect(() => new Character('a', 'Zombie')).toThrow('Длина имени должна быть от 2 до 10 символов');
 });
 
 test('long name', () => {
-  expect(new Bowman('asdasdasdasd', 'Bowman')).toThrow('Длина имени должна быть от 2 до 10 символов');
+  expect(() => new Character('asdasdasdasd', 'Bowman')).toThrow('Длина имени должна быть от 2 до 10 символов');
 });
 
 test('class does not exist', () => {
-  expect(new Magician('asd', 'Necromancer')).toThrow('Несуществующий класс');
+  expect(() => new Character('asd', 'Necromancer')).toThrow('Несуществующий класс');
 });
 
 test('two-symbol name', () => {
-  const daemon = new Daemon('Al', 'Daemon');
+  const daemon = new Character('Al', 'Daemon');
   expect(daemon.name).toBe('Al');
 });
 
 test('ten-symbol name', () => {
-  const undead = new Undead('asdqwezxcr', 'Undead');
+  const undead = new Character('asdqwezxcr', 'Undead');
   expect(undead.name).toBe('asdqwezxcr');
 });
 
@@ -37,20 +37,22 @@ test('level-up', () => {
   });
 });
 
-test('level-up', () => {
+test('level-up of dead', () => {
   const bowman = new Bowman('asd', 'Bowman');
   bowman.health = 0;
-  expect(bowman.levelUp()).toThrow('Нельзя повысить левел умершего');
+  expect(() => bowman.levelUp()).toThrow('Нельзя повысить левел умершего');
 });
 
-const swordsman = new Swordsman('asd', 'Swordsman');
+
 
 test('damage', () => {
+  const swordsman = new Swordsman('asd', 'Swordsman');
   swordsman.damage(10);
   expect(swordsman.health).toBe(91);
 });
 
-test('damage', () => {
+test('damage of dead', () => {
+  const swordsman = new Swordsman('asd', 'Swordsman');
   swordsman.health = 0;
-  expect(swordsman.damage(10)).toThrow('Нельзя нанести урон умершему');
+  expect(() => swordsman.damage(10)).toThrow('Нельзя нанести урон умершему');
 });
